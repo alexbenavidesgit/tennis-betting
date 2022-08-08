@@ -1,3 +1,4 @@
+from random import expovariate
 import pandas as pd
 from datetime import datetime
 from pprint import pprint
@@ -7,23 +8,46 @@ def input_player():
     return player
 
 
-def wins_table():
+MAINDIR = "./"
+
 # Read and Prepare Tables
-    atp2022 = pd.read_csv('Data/atp_matches_2022.csv', encoding = 'UTF-8')
-    challenger2022 = pd.read_csv('Data/atp_matches_qual_chall_2022.csv', encoding = 'UTF-8')
-    Futures2022 = pd.read_csv('Data/atp_matches_futures_2022.csv', encoding = 'UTF-8')
-    atp2022 = pd.DataFrame(atp2022)
-    challenger2022 = pd.DataFrame(challenger2022)
-    futures2022 = pd.DataFrame(Futures2022)
+atp2022 = pd.read_csv('Data/atp_matches_2022.csv', encoding = 'UTF-8')
+challenger2022 = pd.read_csv('Data/atp_matches_qual_chall_2022.csv', encoding = 'UTF-8')
+Futures2022 = pd.read_csv('Data/atp_matches_futures_2022.csv', encoding = 'UTF-8')
 
-    allMatches = pd.concat([atp2022, challenger2022, futures2022])
+atp2022 = pd.DataFrame(atp2022)
+challenger2022 = pd.DataFrame(challenger2022)
+futures2022 = pd.DataFrame(Futures2022)
 
-    # Collecting Wins from Inputed Player
-    wins_data = allMatches.loc[allMatches["winner_name"] == input_player(), ["loser_name", "loser_rank", 'score', 'tourney_date','loser_ioc']]
-    # Formatting Table
-    wins_data = wins_data.reset_index(drop = True)
-    wins_data = pd.DataFrame(wins_data)
-    wins_data[['tourney_date']] = wins_data[['tourney_date']].applymap(str).applymap(lambda s: "{}/{}/{}".format(s[4:6],s[6:], s[0:4]))
-    wins_data.columns = ['Opp_Name', 'Opp_Ranking', 'Score', 'Date', 'Nationality']
+allMatches = pd.concat([atp2022, challenger2022, futures2022])
 
-    return wins_data
+points_tracker = {
+    '100-200': {"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '200-300': {"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '300-400': {"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '400-500':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '500-600':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '600-700':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0},
+    '700-800':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '800-900':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '900-1000':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0},
+    '1000-1100':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '1100-1200':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '1200-1300':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0},
+    '1300-1400':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '1400-1500':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0}, 
+    '1500-1600':{"Wins": [],"firstLayerPoints": 0, "SecondLayerPoints": 0, "Losses": [], "firstLayerPointsL": 0, "SecondLayerPointsL": 0},        
+    }
+
+secondary_points_tracker = {
+        '100-200': [], '200-300': [], '300-400': [], 
+        '400-500':[], '500-600':[], '600-700':[],
+        '700-800':[], '800-900':[], '900-1000':[],
+        '1000-1100':[], '1100-1200':[], '1200-1300':[],
+        '1300-1400':[], '1400-1500':[], '1500-1600':[],        
+    }
+
+player = ""
+
+
+# Need to figure out how to export these objects to use in other files
