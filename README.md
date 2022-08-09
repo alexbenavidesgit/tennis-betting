@@ -1,6 +1,104 @@
 # tennis-betting
 Picking tennis winners
 
+Developer Onboarding 
+Device Onboarding - Mac
+Open Terminal
+Paste in the following -> /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+Follow steps after. You need to put everything in the correct path
+Download VSCode + the following extensions
+CSV to Table 
+Rainbow CSV
+Install git 
+$ brew install git
+Clone repo
+$ git clone https://github.com/JeffSackmann/tennis_atp.git
+$ git clone https://github.com/alexbenavidesgit/tennis-betting.git
+Make your own branch -> $ git checkout -b “name-of-branch”
+Install Python
+$ brew install python
+$ brew unlink python && brew link python
+Install virtual env
+$ python3 -m pip install virtualenv
+Activate venv
+$ cd “location of tennis-betting repo”
+$ virtualenv venv
+$ source venv/bin/activate
+$ pip install <package>
+Download packages ONLY inside venv to avoid destroying your laptop
+$ deactivate
+ONLY deactivate whenever you’re done using venv
+Install Jupyter Notebook inside virtual env
+$ pip install notebook
+$ jupyter notebook
+Ponte Pilas 
+
+Device Onboarding - Windows
+Download GIT
+Download VSCode + the following extensions
+CSV to Table 
+Rainbow 
+Do you download these in VCCode?
+Clone repo 
+$ git clone https://github.com/JeffSackmann/tennis_atp.git
+Put this in a separate folder.
+so that you don’t make a cagadero
+$ git clone https://github.com/alexbenavidesgit/tennis-betting.git
+Make your own branch -> $ git checkout -b “name-of-branch”
+Install Python
+Install virtual env
+Activate venv
+Ponte Pilas
+
+Git Repos 
+Tennis related
+1.Historical tennis results
+https://github.com/JeffSackmann/tennis_atp.git
+Python scripts to predict results
+https://github.com/edouardthom/ATPBetting
+
+
+APIs
+Betting odds
+https://www.lsports.eu/oddservice/?gclid=Cj0KCQjwuaiXBhCCARIsAKZLt3neCAqKDmAPkVYiyJJt_cZ2nUuBsKW7gtw65gMldn8ZE1PJwWDsbqoaAqExEALw_wcB
+https://oddsmatrix.com/sports/tennis/?gclid=Cj0KCQjwuaiXBhCCARIsAKZLt3m0eVsPeFFzH7aWDhFAPxs0lwmq-EOZ71XcoOx7fY7wKBFqj6vLJaoaApU7EALw_wcB
+
+Ideas
+H2H
+Website?
+Get odds
+Build DB of previous odds
+What round the match took place
+How many future semis or finals
+Locations of tournament
+
+
+FerSure Algorithm (futures & challenger matchups )
+
+Collect wins & losses 
+Figure out a system that assigns a score for each recent win depending on rankings (can also drill in and assess the level of the players that they have beat)
+e.g Player A has beat 3 guys ranked in the top 600. Now lets look into who those 3 guys are and who they’ve beat. 
+Eventually maybe we can collect every player Player A & Player B has played in the last 3 months, wins & losses, and look into how good or bad those results were. 
+Eventually we need to also collect data from NCAA and have a check before we assess a player - just in case we get the goaty college guy with no rankings 
+Also need to check junior ITF junior rankings (only relevant if top 200)
+Qualifying W/L record in futures and challengers (if you have a guy that has played 30 futures and losses in qualies everytime - we can put a Checko B. mark 
+Create a metric that takes into account how many tournaments it took for a player to reach their ranking
+You could have a guy ranked 750 whose played 30 futures and a guy ranked 1000 whose played 3 in fucking florida 
+Id give some sort of edge to the guy whose played 3 fer sure fer sure 
+
+*** We could do a test run where we manually create a JSON with lets say 50 upcoming matches and then we run our algo on da historical data and see how it performs
+	* for sure. We could use those as unit test.
+	* imagine, if we had unit test or something to see how our specific algo does vs next 50 matches. It would be SICK. that means we can try so much random shit and see how it does
+
+
+
+
+
+Comments Sections:
+
+
+
+
 ## Ideas
 - Explore https://developer.sportradar.com/ for free api
 
